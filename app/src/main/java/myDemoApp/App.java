@@ -63,10 +63,13 @@ public class App {
         if(inputList2.get(1) != null)
           maks_index = inputList2.get(1);
 
-      
-        int result = App.rangeAdding(inputList, min_index,maks_index);
-
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        //int result = App.rangeAdding(inputList, min_index,maks_index);
+        //Map<String, Integer> map = new HashMap<String, Integer>();
+        
+        boolean result = App.rangeValid(inputList, min_index,maks_index);
+        Map<String, Boolean> map = new HashMap<String, Boolean>();
+        
+        
         map.put("result", result);
         return new ModelAndView(map, "compute.mustache");
       }, new MustacheTemplateEngine());
@@ -89,6 +92,24 @@ public class App {
       return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
   }
 
+
+
+  public static boolean rangeValid(ArrayList<Integer> array, int min_index, int maks_index) {
+    System.out.println("inside arraylist");
+    if (array == null) {
+      System.err.println("empty array");
+      return false;
+    }
+    if(min_index >= maks_index)
+      return false;
+    if(array.size() < maks_index){
+      System.err.println("size is not enough");
+      return false;
+    }
+    
+    return true;
+  }
+  /*
   public static int rangeAdding(ArrayList<Integer> array, int min_index, int maks_index) {
     System.out.println("inside arraylist");
     if (array == null) {
@@ -105,8 +126,8 @@ public class App {
        sum = sum + array.get(i);
     }
     return sum;
-
   }
+  */
   
   /*
     public static int sub(ArrayList<Integer> array, int one, int two) {
