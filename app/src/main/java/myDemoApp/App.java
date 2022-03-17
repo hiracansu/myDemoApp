@@ -31,15 +31,13 @@ public class App {
       get("/", (req, res) -> "Hello, World");
 
       post("/compute", (req, res) -> {
-        //System.out.println(req.queryParams("input1"));
-        //System.out.println(req.queryParams("input2"));
+
 
         String input1 = req.queryParams("input1");
         java.util.Scanner sc1 = new java.util.Scanner(input1);
         sc1.useDelimiter("[;\r\n]+");
         java.util.ArrayList<Integer> inputList = new java.util.ArrayList<>();
-        while (sc1.hasNext())
-        {
+        while (sc1.hasNext()){
           int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
           inputList.add(value);
         }
@@ -47,23 +45,26 @@ public class App {
         System.out.println(inputList);
 
 
-        String input2 = req.queryParams("input2");
 
+        String input2 = req.queryParams("input2");
         java.util.Scanner sc2 = new java.util.Scanner(input2);
         sc2.useDelimiter("[;\r\n]+");
         java.util.ArrayList<Integer> inputList2 = new java.util.ArrayList<>();
-        while (sc2.hasNext())
-        {
+        while (sc2.hasNext()){
           int value2 = Integer.parseInt(sc2.next().replaceAll("\\s",""));
           inputList2.add(value2);
         }
         sc2.close();
 
-        int one = inputList2.get(0);
-        int two = inputList2.get(1);
+        int min_index = 0;
+        int maks_index = 0;
+        if(inputList2.get(0) != null)
+          min_index = inputList2.get(0);
+        if(inputList2.get(1) != null)
+          maks_index = inputList2.get(1);
 
-        //boolean result = App.search(inputList, input2AsInt);
-        int result = App.sub(inputList, one,two);
+      
+        int result = App.rangeAdding(inputList, min_index,maks_index);
 
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("result", result);
@@ -88,18 +89,26 @@ public class App {
       return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
   }
 
-/*
-    public static boolean search(ArrayList<Integer> array, int e) {
-        System.out.println("inside search");
-        if (array == null) return false;
-  
-        for (int elt : array) {
-          if (elt == e) return true;
-        }
-        return false;
+  public static int rangeAdding(ArrayList<Integer> array, int min_index, int maks_index) {
+    System.out.println("inside arraylist");
+    if (array == null) {
+      System.err.println("empty array");
+      return -1;
     }
-*/
+    if(array.size() < maks_index){
+      System.err.println("size is not enough");
+      return -1;
+    }
+    int sum = 0;
+    for (int i = min_index-1; i< maks_index; i++) {
+      if(array.get(i) >0)
+       sum = sum + array.get(i);
+    }
+    return sum;
 
+  }
+  
+  /*
     public static int sub(ArrayList<Integer> array, int one, int two) {
       System.out.println("inside search");
       if (array == null) 
@@ -112,14 +121,7 @@ public class App {
           two =  array.get(i);
       }
       return Math.abs(one-two);
-  }
+    }
 
-
-    //Buraya method yaz !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-
-
-
-
+    */
 }
