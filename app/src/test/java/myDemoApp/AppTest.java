@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
+
 class AppTest {
     @Test void appHasAGreeting() {
        App classUnderTest = new App();
@@ -17,24 +19,24 @@ class AppTest {
     @Test
     public void testFound() {
       ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-      assertTrue(App.rangeAdding(array, 1,4));
+      assertTrue(App.rangeAdding(array, 1,4) != -1);
     }
 
     @Test
     public void testNotFoundTwoIndex() {
       ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-      assertFalse(App.rangeAdding(array, 5,7));
+      assertFalse(App.rangeAdding(array, 5,7) == -1);
     }
 
     public void testNotFoundSecondIndex() {
         ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-        assertFalse(App.rangeAdding(array, 1,7));
+        assertFalse(App.rangeAdding(array, 1,7) == -1);
     }
 
     @Test
     public void testEmptyArray() {
       ArrayList<Integer> array = new ArrayList<>();
-      assertFalse(App.rangeAdding(array, 1,4));
+      assertFalse(App.rangeAdding(array, 1,4) == -1);
     }
 
     @Test
